@@ -41,8 +41,13 @@ export function ToDo() {
                         setInputValue("")
                         return
                     } else {
-                        saveTasks(inputValue)
-                        setInputValue("")
+                        if (inputValue.length < 20) {
+                            saveTasks(inputValue)
+                            setInputValue("")
+                        } else {
+                            setPodeNao(false)
+                            return
+                        }
                     }
                 })
             }
@@ -107,12 +112,12 @@ export function ToDo() {
 
 
                 <div className='add-task'>
-                    <input className='input' type="text" onChange={e => setInputValue(e.target.value)} value={inputValue} onKeyDown={e => AddTask(e)} />
+                    <input className='input' type="text" onChange={e => setInputValue(e.target.value)} value={inputValue} onKeyDown={e => AddTask(e)} maxLength={20} />
                 </div>
 
                 {podeNao ||
                     <div className='podenao'>
-                        <p>Já tem uma task com esse nome</p>
+                        <p>não pode</p>
                         <X size={20} color="#1b1a1a" onClick={() => setPodeNao(true)} />
                     </div>}
             </div>
