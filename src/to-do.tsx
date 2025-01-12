@@ -15,6 +15,7 @@ export function ToDo() {
     const [podeNao, setPodeNao] = useState(true)
 
     useEffect(() => {
+        localStorage.clear();
         const allTasks = localStorage.getItem(storageKey)
         const parseTasks = JSON.parse(allTasks!)
         setTasks(parseTasks ?? [])
@@ -22,7 +23,6 @@ export function ToDo() {
 
     useEffect(() => {
         if (Tasks.length > 0) {
-
             localStorage.setItem(storageKey, JSON.stringify(Tasks))
         }
     }, [Tasks])
